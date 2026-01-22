@@ -21,8 +21,7 @@ export const AddRootButton = () => {
   return (
     <button
       onClick={handleAddRoot}
-      className="fixed top-20 right-6 z-50 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all hover:scale-110 flex items-center gap-2"
-      title="Add New Tree"
+      className="fixed top-20 cursor-pointer right-6 z-50 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all hover:scale-110 flex items-center gap-2"
     >
       <Plus size={20} />
     </button>

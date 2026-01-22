@@ -20,6 +20,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { cn } from "@/lib/utils";
 
 interface TreeNodeProps {
   node: TreeNodeType;
@@ -76,8 +77,8 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(({ node, level }) => {
     e.stopPropagation();
     const newChild: TreeNodeType = {
       id: crypto.randomUUID(),
-      name: "", // Empty name triggers placeholder logic or just empty start
-      type: "COMPONENT",
+      name: "",
+      type: "ASSEMBLY",
       children: [],
     };
     addNode(node.id, newChild);
@@ -128,15 +129,11 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(({ node, level }) => {
       onClick={() => {
         if (!isEditing) {
           setSelectedNode(node.id);
-          // Also allow editing on double click? Or maybe just single click if selected?
-          // User requirement: "option to update that also".
-          // Maybe clicking the label triggers edit?
         }
       }}
       onDoubleClick={(e) => e.stopPropagation()}
     >
       <div className="flex items-center gap-2 overflow-hidden flex-1">
-        {/* Helper Icon (Visual only) */}
         {hasChildren && !isEditing && (
           <div className="p-0.5 opacity-80">
             <Circle size={8} fill="currentColor" className="text-white/70" />
@@ -174,7 +171,6 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(({ node, level }) => {
       <div className="flex items-center gap-1 ml-2">
         {isEditing ? null : (
           <>
-            {/* Add Child Button */}
             <button
               onClick={handleAddChild}
               onDoubleClick={(e) => e.stopPropagation()}
@@ -184,12 +180,11 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(({ node, level }) => {
               <Plus size={14} />
             </button>
 
-            {/* Delete Node Button - Now allowed for all nodes */}
             {
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <button
-                    onClick={(e) => e.stopPropagation()} // Stop prop so we don't select node
+                    onClick={(e) => e.stopPropagation()}
                     onDoubleClick={(e) => e.stopPropagation()}
                     className="p-1 hover:bg-red-500/20 rounded-full transition-colors opacity-0 group-hover:opacity-100 text-white"
                     title="Remove Node"
@@ -226,16 +221,26 @@ export const TreeNode: React.FC<TreeNodeProps> = memo(({ node, level }) => {
         )}
       </div>
 
-      {/* Expander Connector Toggle */}
-      {/* Changing icon to Chevron to avoid confusion with remove (-). */}
       {hasChildren && !isEditing && (
         <div
           onClick={handleToggle}
           onDoubleClick={(e) => e.stopPropagation()}
-          className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white border border-gray-300 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-50 text-gray-600 z-20 shadow-sm transition-transform hover:scale-110"
+          className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border border-gray-300 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-50 text-gray-600 z-20 shadow-sm transition-transform hover:scale-110"
           title={isExpanded ? "Collapse" : "Expand"}
         >
-          {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+          {/* {isExpanded ? (
+            <ChevronDown size={14} className="" />
+          ) : (
+            <ChevronRight size={14} />
+          )} */}
+
+          <ChevronDown
+            size={12}
+            className={cn(
+              "transition-transform transform ",
+              isExpanded && "-rotate-90",
+            )}
+          />
         </div>
       )}
     </motion.div>

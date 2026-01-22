@@ -17,13 +17,13 @@ export const TreeCanvas: React.FC = () => {
       <div
         className={cn(
           "absolute inset-0",
-          "[background-size:16px_16px]",
-          "[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]",
-          "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]",
+          "bg-size-[16px_16px]",
+          "bg-[radial-gradient(#d4d4d4_1px,transparent_1px)]",
+          "dark:bg-[radial-gradient(#404040_1px,transparent_1px)]",
           "h-full w-full",
         )}
       />
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
 
       <TransformWrapper
         initialScale={1}
@@ -38,14 +38,14 @@ export const TreeCanvas: React.FC = () => {
             <div className="fixed bottom-8 right-6 flex flex-row gap-2 z-50">
               <button
                 onClick={() => zoomIn()}
-                className="p-2 bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors"
+                className="p-2 cursor-pointer bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors"
                 title="Zoom In"
               >
                 <Plus size={12} />
               </button>
               <button
                 onClick={() => zoomOut()}
-                className="p-2 bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors"
+                className="p-2 cursor-pointer bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors"
                 title="Zoom Out"
               >
                 <Minus size={12} />
@@ -53,7 +53,7 @@ export const TreeCanvas: React.FC = () => {
 
               <button
                 onClick={() => centerView()}
-                className="p-2 bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors"
+                className="p-2 cursor-pointer bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors"
                 title="Center View"
               >
                 <Maximize size={12} />
