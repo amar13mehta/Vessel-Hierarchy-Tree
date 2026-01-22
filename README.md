@@ -172,11 +172,6 @@ The application includes:
 
 This project is licensed under the MIT License.
 
-## 🙏 Acknowledgments
-
-- Design inspiration from modern ship management systems
-- Built as part of a technical assessment
-
 ## 👨‍💻 Author
 
 **Amar Mehta**
